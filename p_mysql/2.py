@@ -15,9 +15,15 @@ uname = input('Enter user name : ')
 upass = input('Enter password : ')
 
 cur = connection.cursor()
-
 query = "insert into Login (UserName , Password) values (%s, %s)"
+
 cur.execute(query,(uname,upass))
+connection.commit()  # inserting the query into mysql table.
+
+cur.execute("select*from Login;")
+response = cur.fetchall()
+for i in response:
+    print(i)
 
 print('Data entered successfully !')
 
