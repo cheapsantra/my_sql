@@ -11,9 +11,10 @@ try:
 
     if mydb.is_connected():
         c_execute = mydb.cursor()
-        c_execute.execute("SELECT * from Students;")
-        record = c_execute.fetchall()
-        print("you are connected to database: ", record)
+        print('Enter into myconnect.')
+        c_execute.execute("create table login")
+        print('Table created !')
+        
 
 except :
     print("couldn't connect to database.")

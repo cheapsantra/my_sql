@@ -7,7 +7,7 @@ connection = sq.connect(
     database = "my_dbprj"
     )
 
-if connection.is_connected == False:
+if connection.is_connected() == False:
     print("connection failed")
 
 
@@ -25,7 +25,7 @@ def insert_records():                   #function to insert values into table
     print("Entered insert_records function! ")
     cur = connection.cursor()
     t_name = input("enter table name to insert into: ")
-    t_values = input("enter the values (comma separated): ")
+    t_values = input("enter the values: ")
     query = f"INSERT INTO {t_name} VALUES ({t_values});"
     print(f"Records inserted into '{t_name}' successfully.")
     cur.execute(query)
@@ -33,8 +33,23 @@ def insert_records():                   #function to insert values into table
 
 def view_records():                      #function to view values of table
     print("Entered view_records function! ")
+    cur = connection.cursor()
+    t_name = input("Enter table name to view: ")
+    query = f"SELECT * FROM {t_name};"
+    cur.execute(query)
+    records = cur.fetchall()
+    for record in records:
+        print(record)
+
 def list_tables():                       #function to list tables
     print("Entered list_tables function! ")
+    cur = connection.cursor()
+    query = "SHOW TABLES;"
+    cur.execute(query)
+    tables = cur.fetchall()
+    for table in tables:
+        print(table[0])
+
 # main()
 print('Student Database Record !')
 
